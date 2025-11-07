@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOLIVIA URAQI</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      margin: 0;
+      background: #0a0a0a; /* Fondo negro base */
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas para fondo animado */
+    canvas#fondoAnimado {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Detrás del contenido */
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: #187885;
+      border-bottom: 4px solid;
+      position: fixed;
+      width: 96%;
+      z-index: 90;
+    }
+
+    .logo-header {
+  width: 80%;      
+  max-width: 900px; 
+  height: auto;    
+  margin: 20px auto; 
+  display: block;
+  border-radius: 12px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* opcional, resalta la imagen */
+}
+
+    header h1 {
+      font-size: 20px;
+      text-shadow: 2px 2px #000;
+    }
+
+    header.shift {
+      transform: translateX(250px);
+    }
+
+    .menu-btn {
+      position: absolute;
+      right: 20px;
+      width: 60px;
+      height: 52px;
+      background: linear-gradient(135deg, #7869e8, #b53ee8);
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      border: 3px solid #fff;
+      border-radius: 12px;
+      box-shadow: 4px 4px 0px #000;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      visibility: hidden;
+      z-index: 99;
+    }
+
+    .overlay.active {
+      visibility: visible;
+    }
+
+    .side-menu {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #1c1c3c;
+      transform: translateX(-100%);
+      padding-top: 70px;
+      box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.6);
+      transition: 0.35s;
+      z-index: 102;
+    }
+
+    .side-menu.open {
+      transform: translateX(0);
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      border-bottom: 2px solid #6d6d6d;
+    }
+
+    .side-menu a:hover {
+      background: #333;
+    }
+
+    .side-menu .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      color: #fff;
+    }
+
+    #video iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border-radius: 10px;
+}
+    #inicio-portada {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #inicio-portada h1 {
+      font-size: clamp(60px, 10vw, 90px);
+      line-height: 1.2;
+      background: linear-gradient(to right, red, yellow, green);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 3px;
+      text-shadow: 3px 3px 3px rgba(44, 43, 43, 0.5);
+      margin-bottom: 20px;
+    }
+
+    #inicio-portada h3 {
+      font-size: clamp(16px, 3vw, 24px);
+      text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    section {
+      min-height: 100vh;
+      text-align: center;
+      padding: 120px 22px 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-box {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      margin: 20px auto;
+    }
+
+    .main-btn {
+      padding: 18px 40px;
+      font-size: clamp(14px, 3vw, 22px);
+      border: 3px solid #ffffff;
+      background: linear-gradient(135deg, #7869e8, #b53ee8);
+      color: #000;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 6px 6px 0px #000;
+      transition: 0.23s;
+    }
+
+    .main-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 8px 8px 0px #003b47;
+      background: linear-gradient(135deg, #b53ee8, #7869e8);
+    }
+
+    /* Sección de contacto centrada sin recuadro */
+    #contacto div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    #contacto h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <canvas id="fondoAnimado"></canvas>
+
+  <header>
+    <h1>Bolivia Uraqi</h1>
+    <div class="menu-btn" onclick="openMenu()">☰</div>
+  </header>
+
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+  <div id="sideMenu" class="side-menu">
+    <span class="close-btn" onclick="closeMenu()">x</span>
+    <a href="#inicio-portada">Inicio</a>
+    <a href="#historia">Contenido</a>
+    <a href="#novedades">Galería</a>
+    <a href="#descargar">Descargar</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+
+  <section id="inicio-portada">
+    <h1>Bienvenidos a<br>Bolivia Uraqi</h1>
+    <h3>Videojuego educativo e interactivo</h3>
+  </section>
+
+  <section id="inicio-detalle">
+    <h1>Inicio</h1>
+    <div class="content-box" style="line-height: 1.8;">
+      <p>Bolivia Uraqi es un videojuego educativo en 2D diseñado para niños de 4º año de primaria.  
+ <br>   <br>  El jugador recorrerá los nueve departamentos de Bolivia, explorando cada nivel basado en sus historias de las fundaciones de los departamentos.  
+     <br><br> Durante el juego, los niños aprenderán sobre fechas importantes, fundadores y datos curiosos de cada región mientras superan obstáculos y recolectan monedas para ir a la seccion de las preguntas de esta manera pasar al siguiente nivel.
+    <br><br> Bolivia Uraqi es un videojuego de búsqueda, las monedas se encuentran dispersas en todo el recorrido donde tambien se podra interactuar con distintos elementos como enemigos o contenedores de información.</p>
+    
+     <img src="img_2.jpg" class="logo-header"></div>
+  </section>
+
+  <section id="historia">
+    <h1>Contenido</h1>
+    <div class="content-box" style="line-height: 1.8;">
+      <p><strong>Chuquisaca:</strong> Fundada en 1540 por Pedro de Anzures con el nombre de <em>La Plata</em>, fue un centro importante durante la colonia y escenario de conflictos sociales que desembocaron en la revolución del 25 de mayo de 1809. Su capital se convirtió en el núcleo de la independencia del Alto Perú y, en 1826, se oficializó como departamento.</p>
+      <p><strong>La Paz:</strong> Fundada en 1548 por Alonso Mendoza en el valle de Chuquiago Marka, se consolidó como un centro estratégico de comercio y administración colonial. Su diseño siguió el formato greco-romano con calles ortogonales y barrios específicos para indígenas.</p>
+      <p><strong>Cochabamba:</strong> Fundada inicialmente en 1571 como Villa Real de Oropesa y refundada en 1574, su objetivo fue ser centro agrícola para abastecer a las ciudades mineras cercanas.</p>
+      <p><strong>Potosí:</strong> Fundada en 1545 tras el descubrimiento de plata en el Cerro Rico, alcanzó gran auge durante la colonia. Actualmente es Patrimonio Cultural de la Humanidad, destacando por su historia minera y su riqueza cultural y gastronómica.</p>
+      <p><strong>Oruro:</strong> Fundada en 1606 como Real Villa de Don Felipe de Austria, creció rápidamente con población española e indígena y fue un importante centro minero durante el siglo XVII.</p>
+      <p><strong>Santa Cruz:</strong> Fundada en 1561 por Ñuflo de Chaves, tuvo varias traslaciones hasta su ubicación actual. Su historia se vincula con la exploración de la región y la colonización de los Chiquitos.</p>
+      <p><strong>Tarija:</strong> Fundada en 1574 por Luis de Fuentes y Vargas, fue centro evangelizador y agrícola. Durante la independencia, tuvo conflictos con Argentina antes de integrarse a Bolivia en 1826.</p>
+      <p><strong>Beni:</strong> Creado en 1842 por el presidente José Ballivián para fomentar el poblamiento y la navegación en la región amazónica.</p>
+      <p><strong>Pando:</strong> Creado en 1938 por el presidente Germán Busch, su economía se basó primero en la quina y luego en el caucho, para finalmente consolidarse con la producción de castaña y explotación forestal.</p>
+    </div>
+  </section>
+
+  <section id="novedades">
+    <h1>Galería</h1>
+    <div class="content-box" style="line-height: 1.8;">
+      <p>Para que entienda el videojuego les presentamos los siguientes anexos.</p>
+      <img src="img_1.jpg" class="logo-header">
+      <img src="img_3.jpg" class="logo-header">
+      <img src="img_4.jpg" class="logo-header">
+      <img src="img_5.jpg" class="logo-header">
+      <img src="img_6.jpg" class="logo-header">
+      <img src="img_7.jpg" class="logo-header">
+    </div>
+   <!--  <h2>Video Tutorial</h2>
+  <div class="content-box" style="line-height: 1.8;">
+    <iframe width="560" height="315" 
+            src="https://youtu.be/cDX9djaj0dg?feature=shared/cDX9djajodg" 
+            title="Video Tutorial Bolivia Uraqi" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+  </div> -->
+  <br><br><br>
+<div class="content-box" style="line-height: 1.8;">
+  <h2>Video Tutorial</h2>
+
+  <img src="img_8.jpg" class="logo-header">
+  <a href="https://youtu.be/cDX9djaj0dg" target="_blank">
+    Ver el video en YouTube
+  </a>
+</div>
+
+
+  </section>
+
+  <section id="descargar">
+    <h1>Descargar para PC</h1>
+    <br><br><p>Presione el botón para comenzar la descarga del videojuego en su computadora.  
+Este videojuego está diseñado para ser educativo, interactivo y seguro para niños, permitiendo aprender sobre las fundaciones de los departamentos de Bolivia de una forma divertida.</p><p>Cada vez que se publique una nueva versión del juego, podrá descargarla nuevamente desde esta misma página. Solo tendrá que presionar el botón de descarga para obtener la actualización más reciente.</p>
+    <button class="main-btn" onclick="descargar()">DESCARGAR</button>
+    <div class="content-box" style="line-height: 1.8;">
+      
+    </div>
+    <h1>Descargar para Android</h1>
+    <br><br><p>Si desea jugar en un dispositivo Android, simplemente presione el botón para descargar la versión móvil.  
+El videojuego mantiene todas las funciones educativas y la misma experiencia interactiva y entretenida.</p><p>Al igual que en la versión para PC, todas las actualizaciones estarán disponibles en esta página web. Cada vez que se realice una mejora, usted podrá descargar la versión actualizada con un solo clic.</p>
+    </div>
+    <button class="main-btn" onclick="descargarAndroid()">DESCARGAR</button>
+    <div class="content-box" style="line-height: 1.8;">
+      
+  </section>
+
+  <section id="contacto">
+    <h1>Contacto</h1>
+    <div style="line-height: 1.8;">
+      <p>Contáctanos por WhatsApp:</p><br><br>
+      <a href="https://wa.me/59169963102" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
+        +591 69963102
+      </a><br>
+      <a href="https://wa.me/59160525955" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
+        +591 60525955
+      </a><br>
+      <a href="https://wa.me/59172564674" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
+        +591 72564674
+      </a>
+    </div>
+  </section>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("overlay").classList.add("active");
+      document.querySelector("header").classList.add("shift");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("overlay").classList.remove("active");
+      document.querySelector("header").classList.remove("shift");
+    }
+
+    /* function descargar() {
+      window.open("https://drive.google.com/file/d/1hnkxEjbcKECO5HnH-2WfkTYFoLMk3oI-/view?usp=sharing");
+    } */
+
+    
+function descargar() {
+  window.open("https://drive.google.com/uc?export=download&id=1xFyR_tVtYz_6956M464f4glByOzAPq5t");
+}
+
+
+function descargarAndroid() {
+  window.open("https://drive.google.com/uc?export=download&id=1-4x84yC1ucgwGAVu9GyIoKSI9dt2OZ0X");
+}
+
+
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    window.onload = function () {
+      window.scrollTo(0, 0);
+    }
+
+    /* Animación de partículas en el fondo */
+    const canvas = document.getElementById('fondoAnimado');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = 'rgba(0,255,255,0.7)';
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+  </script>
+</body>
+</html> 
