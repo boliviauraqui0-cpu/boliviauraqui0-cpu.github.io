@@ -12,22 +12,23 @@
     body {
       font-family: 'Press Start 2P', cursive;
       margin: 0;
-      background: #0a0a0a; /* Fondo negro base */
+      background: #0a0a0a;
       color: white;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Canvas para fondo animado */
+    /* Fondo animado */
     canvas#fondoAnimado {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Detrás del contenido */
+      z-index: -1;
     }
 
+    /* CABECERA */
     header {
       display: flex;
       justify-content: center;
@@ -36,34 +37,23 @@
       background: #187885;
       border-bottom: 4px solid;
       position: fixed;
-      width: 96%;
+      width: 97%;
+      top: 0;
       z-index: 90;
+      left: 0;
     }
-
-    .logo-header {
-  width: 80%;      
-  max-width: 900px; 
-  height: auto;    
-  margin: 20px auto; 
-  display: block;
-  border-radius: 12px; 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* opcional, resalta la imagen */
-}
 
     header h1 {
       font-size: 20px;
       text-shadow: 2px 2px #000;
-    }
-
-    header.shift {
-      transform: translateX(250px);
+      margin: 0;
     }
 
     .menu-btn {
       position: absolute;
       right: 20px;
-      width: 60px;
-      height: 52px;
+      width: 55px;
+      height: 45px;
       background: linear-gradient(135deg, #7869e8, #b53ee8);
       color: black;
       display: flex;
@@ -71,12 +61,13 @@
       align-items: center;
       font-size: 24px;
       border: 3px solid #fff;
-      border-radius: 12px;
+      border-radius: 10px;
       box-shadow: 4px 4px 0px #000;
       cursor: pointer;
       z-index: 101;
     }
 
+    /* MENÚ LATERAL */
     .overlay {
       position: fixed;
       width: 100%;
@@ -112,7 +103,7 @@
       display: block;
       padding: 15px 30px;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 14px;
       color: #fff;
       border-bottom: 2px solid #6d6d6d;
     }
@@ -127,40 +118,10 @@
       right: 20px;
       font-size: 28px;
       color: #fff;
+      cursor: pointer;
     }
 
-    #video iframe {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
-  border-radius: 10px;
-}
-    #inicio-portada {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    #inicio-portada h1 {
-      font-size: clamp(60px, 10vw, 90px);
-      line-height: 1.2;
-      background: linear-gradient(to right, red, yellow, green);
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: 3px;
-      text-shadow: 3px 3px 3px rgba(44, 43, 43, 0.5);
-      margin-bottom: 20px;
-    }
-
-    #inicio-portada h3 {
-      font-size: clamp(16px, 3vw, 24px);
-      text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
-    }
-
+    /* SECCIONES GENERALES */
     section {
       min-height: 100vh;
       text-align: center;
@@ -179,11 +140,51 @@
       max-width: 800px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       margin: 20px auto;
+      line-height: 1.8;
     }
 
+    /* PORTADA PRINCIPAL */
+    #inicio-portada {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    #inicio-portada h1 {
+      font-size: clamp(40px, 10vw, 90px);
+      line-height: 1.2;
+      background: linear-gradient(to right, red, yellow, green);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 3px;
+      text-shadow: 3px 3px 3px rgba(44, 43, 43, 0.5);
+      margin-bottom: 20px;
+    }
+
+    #inicio-portada h3 {
+      font-size: clamp(14px, 3vw, 24px);
+      text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* IMÁGENES */
+    .logo-header {
+      width: 90%;
+      max-width: 800px;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* BOTONES */
     .main-btn {
-      padding: 18px 40px;
-      font-size: clamp(14px, 3vw, 22px);
+      padding: 16px 30px;
+      font-size: clamp(12px, 3vw, 18px);
       border: 3px solid #ffffff;
       background: linear-gradient(135deg, #7869e8, #b53ee8);
       color: #000;
@@ -191,6 +192,7 @@
       cursor: pointer;
       box-shadow: 6px 6px 0px #000;
       transition: 0.23s;
+      margin: 20px 0;
     }
 
     .main-btn:hover {
@@ -199,7 +201,7 @@
       background: linear-gradient(135deg, #b53ee8, #7869e8);
     }
 
-    /* Sección de contacto centrada sin recuadro */
+    /* CONTACTO */
     #contacto div {
       display: flex;
       flex-direction: column;
@@ -209,14 +211,142 @@
       margin-top: 20px;
     }
 
-    #contacto h1 {
-      text-align: center;
+    #contacto a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      margin: 8px 0;
+      font-size: 14px;
     }
+
+    #contacto img {
+      width: 40px;
+    }
+
+    /* RESPONSIVIDAD */
+    @media (max-width: 768px) {
+
+      header {
+        padding: 15px;
+      }
+
+      header h1 {
+        font-size: 16px;
+      }
+
+      .menu-btn {
+        width: 50px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      section {
+        padding: 100px 15px 20px;
+      }
+
+      .content-box {
+        padding: 15px;
+      }
+
+      #inicio-portada h1 {
+        font-size: 38px;
+      }
+
+      #inicio-portada h3 {
+        font-size: 16px;
+      }
+
+      .logo-header {
+        width: 100%;
+      }
+
+      .main-btn {
+        width: 90%;
+        font-size: 14px;
+        padding: 14px;
+      }
+
+      .side-menu {
+        width: 200px;
+      }
+
+      .side-menu a {
+        font-size: 13px;
+        padding: 12px 20px;
+      }
+
+      #contacto a {
+        font-size: 12px;
+      }
+
+      #contacto img {
+        width: 32px;
+      }
+    }
+
+   @media (max-width: 480px) {
+  body {
+    font-size: 10px;
+  }
+
+  header h1 {
+    font-size: 13px;
+  }
+
+  section {
+    padding: 90px 12px 25px;
+  }
+
+  .content-box {
+    padding: 12px;
+    font-size: 10px;
+  }
+
+  .side-menu {
+    width: 170px;
+  }
+
+  #inicio-portada {
+    padding: 0 8px;
+  }
+
+  #inicio-portada h1 {
+    font-size: clamp(22px, 8vw, 38px);
+  }
+
+  #inicio-portada h3 {
+    font-size: clamp(10px, 3.5vw, 13px);
+  }
+
+  .menu-btn {
+    width: 40px;
+    height: 36px;
+    font-size: 16px;
+    right: 10px;
+  }
+
+  .main-btn {
+    font-size: 11px;
+    padding: 10px 18px;
+  }
+
+  .logo-header {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  a {
+    word-break: break-word;
+  }
+}
+
   </style>
 </head>
 
 <body>
- 
+
   <canvas id="fondoAnimado"></canvas>
 
   <header>
@@ -241,13 +371,16 @@
 
   <section id="inicio-detalle">
     <h1>Inicio</h1>
-    <div class="content-box" style="line-height: 1.8;">
-      <p>Bolivia Uraqi es un videojuego educativo en 2D diseñado para niños de 4º año de primaria.  
- <br>   <br>  El jugador recorrerá los nueve departamentos de Bolivia, explorando cada nivel basado en sus historias de las fundaciones de los departamentos.  
-     <br><br> Durante el juego, los niños aprenderán sobre fechas importantes, fundadores y datos curiosos de cada región mientras superan obstáculos y recolectan monedas para ir a la seccion de las preguntas de esta manera pasar al siguiente nivel.
-    <br><br> Bolivia Uraqi es un videojuego de búsqueda, las monedas se encuentran dispersas en todo el recorrido donde tambien se podra interactuar con distintos elementos como enemigos o contenedores de información.</p>
-    
-     <img src="img_2.jpg" class="logo-header"></div>
+    <div class="content-box">
+      <p>Bolivia Uraqi es un videojuego educativo en 2D diseñado para niños de 4º año de primaria.<br><br>
+        El jugador recorrerá los nueve departamentos de Bolivia, explorando cada nivel basado en sus historias y
+        fundaciones.<br><br>
+        Los niños aprenderán sobre fechas importantes, fundadores y datos curiosos de cada región mientras superan
+        obstáculos y recolectan monedas.<br><br>
+        El videojuego permite interactuar con enemigos y objetos de información para avanzar de nivel.
+      </p>
+      <img src="img_2.jpg" class="logo-header">
+    </div>
   </section>
 
   <section id="historia">
@@ -267,70 +400,42 @@
 
   <section id="novedades">
     <h1>Galería</h1>
-    <div class="content-box" style="line-height: 1.8;">
-      <p>Para que entienda el videojuego les presentamos los siguientes anexos.</p>
+    <div class="content-box">
+      <p>Para comprender mejor el videojuego, les presentamos los siguientes anexos.</p>
       <img src="img_1.jpg" class="logo-header">
       <img src="img_3.jpg" class="logo-header">
       <img src="img_4.jpg" class="logo-header">
       <img src="img_5.jpg" class="logo-header">
       <img src="img_6.jpg" class="logo-header">
       <img src="img_7.jpg" class="logo-header">
+      <h2>Video Tutorial</h2>
+      <img src="img_8.jpg" class="logo-header">
+      <a href="https://youtu.be/cDX9djaj0dg" target="_blank" class="main-btn">Ver video en YouTube</a>
     </div>
-   <!--  <h2>Video Tutorial</h2>
-  <div class="content-box" style="line-height: 1.8;">
-    <iframe width="560" height="315" 
-            src="https://youtu.be/cDX9djaj0dg?feature=shared/cDX9djajodg" 
-            title="Video Tutorial Bolivia Uraqi" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-  </div> -->
-  <br><br><br>
-<div class="content-box" style="line-height: 1.8;">
-  <h2>Video Tutorial</h2>
-
-  <img src="img_8.jpg" class="logo-header">
-  <a href="https://youtu.be/cDX9djaj0dg" target="_blank">
-    Ver el video en YouTube
-  </a>
-</div>
-
-
   </section>
 
   <section id="descargar">
     <h1>Descargar para PC</h1>
-    <br><br><p>Presione el botón para comenzar la descarga del videojuego en su computadora.  
-Este videojuego está diseñado para ser educativo, interactivo y seguro para niños, permitiendo aprender sobre las fundaciones de los departamentos de Bolivia de una forma divertida.</p><p>Cada vez que se publique una nueva versión del juego, podrá descargarla nuevamente desde esta misma página. Solo tendrá que presionar el botón de descarga para obtener la actualización más reciente.</p>
+    <p>Presione el botón para descargar el videojuego en su computadora.</p>
     <button class="main-btn" onclick="descargar()">DESCARGAR</button>
-    <div class="content-box" style="line-height: 1.8;">
-      
-    </div>
+
     <h1>Descargar para Android</h1>
-    <br><br><p>Si desea jugar en un dispositivo Android, simplemente presione el botón para descargar la versión móvil.  
-El videojuego mantiene todas las funciones educativas y la misma experiencia interactiva y entretenida.</p><p>Al igual que en la versión para PC, todas las actualizaciones estarán disponibles en esta página web. Cada vez que se realice una mejora, usted podrá descargar la versión actualizada con un solo clic.</p>
-    </div>
+    <p>También disponible en versión móvil.</p>
     <button class="main-btn" onclick="descargarAndroid()">DESCARGAR</button>
-    <div class="content-box" style="line-height: 1.8;">
-      
   </section>
 
   <section id="contacto">
     <h1>Contacto</h1>
-    <div style="line-height: 1.8;">
-      <p>Contáctanos por WhatsApp:</p><br><br>
-      <a href="https://wa.me/59169963102" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
-        +591 69963102
-      </a><br>
-      <a href="https://wa.me/59160525955" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
-        +591 60525955
-      </a><br>
-      <a href="https://wa.me/59172564674" target="_blank" style="margin: 5px 0; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; vertical-align: middle;">
-        +591 72564674
+    <div>
+      <p>Contáctanos por WhatsApp:</p>
+      <a href="https://wa.me/59169963102" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> +591 69963102
+      </a>
+      <a href="https://wa.me/59160525955" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> +591 60525955
+      </a>
+      <a href="https://wa.me/59172564674" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> +591 72564674
       </a>
     </div>
   </section>
@@ -339,40 +444,22 @@ El videojuego mantiene todas las funciones educativas y la misma experiencia int
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("overlay").classList.add("active");
-      document.querySelector("header").classList.add("shift");
     }
 
     function closeMenu() {
       document.getElementById("sideMenu").classList.remove("open");
       document.getElementById("overlay").classList.remove("active");
-      document.querySelector("header").classList.remove("shift");
     }
 
-    /* function descargar() {
-      window.open("https://drive.google.com/file/d/1hnkxEjbcKECO5HnH-2WfkTYFoLMk3oI-/view?usp=sharing");
-    } */
-
-    
-function descargar() {
-  window.open("https://drive.google.com/uc?export=download&id=1xFyR_tVtYz_6956M464f4glByOzAPq5t");
-}
-
-
-function descargarAndroid() {
-  window.open("https://drive.google.com/uc?export=download&id=1-4x84yC1ucgwGAVu9GyIoKSI9dt2OZ0X");
-}
-
-
-
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
+    function descargar() {
+      window.open("https://drive.google.com/uc?export=download&id=1xFyR_tVtYz_6956M464f4glByOzAPq5t");
     }
 
-    window.onload = function () {
-      window.scrollTo(0, 0);
+    function descargarAndroid() {
+      window.open("https://drive.google.com/uc?export=download&id=1-4x84yC1ucgwGAVu9GyIoKSI9dt2OZ0X");
     }
 
-    /* Animación de partículas en el fondo */
+    /* Fondo animado */
     const canvas = document.getElementById('fondoAnimado');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -392,7 +479,6 @@ function descargarAndroid() {
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
       }
@@ -430,4 +516,4 @@ function descargarAndroid() {
   </script>
 </body>
 
-</html> 
+</html>
